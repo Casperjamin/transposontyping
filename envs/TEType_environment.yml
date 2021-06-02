@@ -1,0 +1,19 @@
+name: snakemake
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - biopython
+  - pip=19.3.1=py36_0
+  - bedtools
+  - samtools
+  - bwa
+  - blast
+  - spades
+  - pysam
+  - pyvcf=0.6.8=py36_0
+  - bcftools
+
+  - pip:
+    - TETyper
