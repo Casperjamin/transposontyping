@@ -37,6 +37,7 @@ def check_presence_fastq(SAMPLES):
 def define_input(inputdir):
     inputdir = get_absolute_path(inputdir)
     # check if valid
+    SAMPLES = glob.glob(inputdir + "/*/*fastq.gz")
     check_presence_fastq(SAMPLES)
     samplesdict = {"SAMPLES":{}}
     for i in SAMPLES:
@@ -71,8 +72,8 @@ def define_score(score):
 def launch(cores):
     #change to the location of the repo, this will make sure all envs, databases and other stuff sticks in the repocryptic
     os.chdir(f"{LOCATIONREPO}")
-    os.system(f"snakemake  --use-conda --cores {cores} --snakefile Snakefile_1")
-    os.system(f"snakemake  --use-conda --cores {cores} --snakefile Snakefile_2")
+    os.system(f"snakemake  --use-conda --cores {cores} --snakefile Snakefile_1.smk")
+    os.system(f"snakemake  --use-conda --cores {cores} --snakefile Snakefile_2.smk")
 
 def main(command_line = None):
     #add main parser object

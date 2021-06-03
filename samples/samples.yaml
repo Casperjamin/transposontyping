@@ -1,0 +1,121 @@
+SAMPLES:
+  '18034967':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/18034967/18034967_S50_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/18034967/18034967_S50_L001_R2_001.fastq.gz
+  '19044167':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19044167/19044167_S1_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19044167/19044167_S1_L001_R2_001.fastq.gz
+  '19044170':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19044170/19044170_S13_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19044170/19044170_S13_L001_R2_001.fastq.gz
+  '19045240':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19045240/19045240_S55_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19045240/19045240_S55_L001_R2_001.fastq.gz
+  '19051353':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19051353/19051353_S4_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19051353/19051353_S4_L001_R2_001.fastq.gz
+  '19051354':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19051354/19051354_S4_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19051354/19051354_S4_L001_R2_001.fastq.gz
+  '19051355':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19051355/19051355_S3_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19051355/19051355_S3_L001_R2_001.fastq.gz
+  '19058855':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19058855/19058855_S2_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19058855/19058855_S2_L001_R2_001.fastq.gz
+  '19058891':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19058891/19058891_S2_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19058891/19058891_S2_L001_R2_001.fastq.gz
+  '19060265':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19060265/19060265_S26_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19060265/19060265_S26_L001_R1_001.fastq.gz
+  '19060277':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19060277/19060277_S14_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19060277/19060277_S14_L001_R1_001.fastq.gz
+  '19060652':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19060652/19060652_S1_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19060652/19060652_S1_L001_R2_001.fastq.gz
+  '19061678':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19061678/19061678_S4_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19061678/19061678_S4_L001_R2_001.fastq.gz
+  '19061679':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19061679/19061679_S3_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19061679/19061679_S3_L001_R2_001.fastq.gz
+  '19064179':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19064179/19064179_S5_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19064179/19064179_S5_L001_R2_001.fastq.gz
+  '19064180':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19064180/19064180_S1_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19064180/19064180_S1_L001_R2_001.fastq.gz
+  '19066410':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19066410/19066410_S4_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19066410/19066410_S4_L001_R2_001.fastq.gz
+  '19066411':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19066411/19066411_S6_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19066411/19066411_S6_L001_R2_001.fastq.gz
+  '19066412':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19066412/19066412_S7_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19066412/19066412_S7_L001_R2_001.fastq.gz
+  '19066413':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19066413/19066413_S8_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19066413/19066413_S8_L001_R2_001.fastq.gz
+  '19066414':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19066414/19066414_S9_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19066414/19066414_S9_L001_R2_001.fastq.gz
+  '19069013':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19069013/19069013_S10_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19069013/19069013_S10_L001_R2_001.fastq.gz
+  '19069015':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19069015/19069015_S11_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19069015/19069015_S11_L001_R2_001.fastq.gz
+  '19069632':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19069632/19069632_S1_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19069632/19069632_S1_L001_R1_001.fastq.gz
+  '19069633':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19069633/19069633_S2_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19069633/19069633_S2_L001_R2_001.fastq.gz
+  '19069634':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19069634/19069634_S3_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19069634/19069634_S3_L001_R2_001.fastq.gz
+  '19075471':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075471/19075471_S4_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075471/19075471_S4_L001_R2_001.fastq.gz
+  '19075707':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075707/19075707_S2_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075707/19075707_S2_L001_R1_001.fastq.gz
+  '19075708':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075708/19075708_S3_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075708/19075708_S3_L001_R2_001.fastq.gz
+  '19075726':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075726/19075726_S5_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075726/19075726_S5_L001_R1_001.fastq.gz
+  '19075731':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075731/19075731_S6_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075731/19075731_S6_L001_R2_001.fastq.gz
+  '19075732':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075732/19075732_S1_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19075732/19075732_S1_L001_R2_001.fastq.gz
+  '19087422':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19087422/19087422_S63_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19087422/19087422_S63_L001_R2_001.fastq.gz
+  '19087424':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19087424/19087424_S75_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19087424/19087424_S75_L001_R2_001.fastq.gz
+  '19090073':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19090073/19090073_S63_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19090073/19090073_S63_L001_R2_001.fastq.gz
+  '19090077':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19090077/19090077_S15_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19090077/19090077_S15_L001_R2_001.fastq.gz
+  '19090079':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19090079/19090079_S51_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19090079/19090079_S51_L001_R2_001.fastq.gz
+  '19090153':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19090153/19090153_S75_L001_R2_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19090153/19090153_S75_L001_R2_001.fastq.gz
+  '19090162':
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19090162/19090162_S39_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/19090162/19090162_S39_L001_R1_001.fastq.gz
+  OXA48-ecoli-MUMC:
+    forward: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/OXA48-ecoli-MUMC/OXA48-ecoli-MUMC_S13_L001_R1_001.fastq.gz
+    reverse: /ifs/data/mmbdiagnostics/WGS/illumina/transposon_project/OXA48-ecoli-MUMC/OXA48-ecoli-MUMC_S13_L001_R2_001.fastq.gz
