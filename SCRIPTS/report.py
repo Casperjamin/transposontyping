@@ -12,18 +12,24 @@ import os
 import math
 
 def generate_matrix(SNPfile, lengthfrag):
-    """The generate_matrix function takes a merged dataframe of SNP locations for al samples as input.
-    This is then converted to a squareform matrix and hamming distance is calculated"""
+    """The generate_matrix function takes a merged dataframe of SNP locations
+    for al samples as input. This is then converted to a squareform matrix 
+    and hamming distance is calculated"""
     df = pd.read_csv(str(SNPfile), sep = "\t", index_col = 0)
     distance = pdist(df, 'hamming')
     namelist = df.index
-    hamming_matrix = pd.DataFrame(squareform(distance), columns = namelist, index = namelist)
+    hamming_matrix = pd.DataFrame(
+            squareform(distance),
+            columns = namelist,
+            index = namelist)
     SNP_matrix = hamming_matrix * lengthfrag
     return SNP_matrix
 
 def generate_plot_hamming(SNP_matrix, output, booleanstate):
-    """The generate_plot_hamming function takes the hamming distance matrix from the generate_matrix function as input.
-    this is then used to construct a heatmap and dendrogram indicating phylogeny of compared samples"""
+    """The generate_plot_hamming function takes the hamming distance matrix
+    from the generate_matrix function as input. this is then used 
+    to construct a heatmap and dendrogram indicating 
+    phylogeny of compared samples"""
     #make linkage for heatmap and dendrogram
     namelist = SNP_matrix.index
     matrix = squareform(SNP_matrix)
@@ -54,7 +60,11 @@ def generate_plot_coverage(bedgraph, output, sample):
     """
     Take the bedgraph as input and generate a coverage plot for each position
     """
-    df1 = pd.read_csv(bedgraph, sep='\t', usecols=[1,2], names=["position", "read_count"])
+    df1 = pd.read_csv(
+            bedgraph, 
+            sep='\t',
+            usecols=[1,2],
+            names=["position", "read_count"])
     df1['fraction'] = [determine_fraction(x, 500) for x in df1["position"]]
     plt.figure(figsize = [20,15])
     plot1 = sns.boxplot(data=df1, x=df1["fraction"], y=df1['read_count'])
@@ -93,14 +103,20 @@ def generate_plot_SNP_quality(vcf, output, sample):
     plot1.set_xticklabels(df['fraction'].unique(), rotation=90)
     plt.savefig(f'{output}/{sample}_SNP_swarmplot.png')
 
-"""The generate_pairwise_distance function produces a report of pair wise comparison for all analysed samples"""
 def generate_pairwise_distance(matrix, outdir, booleanstate):
+    """The generate_pairwise_distance function produces a report of pair wise
+    comparison for all analysed samples"""
+    
     df = matrix.unstack().reset_index()
     df.columns = ["sample1", "sample2", "distance"]
-    df.to_csv(f"{str(outdir)}/pairwise_distance_{booleanstate}.csv", sep = '\t', header = True)
+    df.to_csv(
+            f"{str(outdir)}/pairwise_distance_{booleanstate}.csv",
+            sep = '\t', header = True)
 
-"""The generate_report function is used to call upon the functions defined above in this script"""
 def generate_report(input, outdir, lengthfrag, booleanstate):
+    """The generate_report function is used to call upon the functions defined
+    above in this script"""
+    
     matrix = generate_matrix(input, lengthfrag)
     generate_pairwise_distance(matrix, outdir, booleanstate)
     generate_plot_hamming(matrix, outdir, booleanstate)
