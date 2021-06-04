@@ -34,10 +34,11 @@ def check_presence_fastq(SAMPLES):
         print("Please give a input directory subdirectories with fastq files \nexiting now.")
         sys.exit()
 
+
 def define_input(inputdir):
     inputdir = get_absolute_path(inputdir)
     # check if valid
-    SAMPLES = glob.glob(inputdir + "/*/*fastq.gz")
+    SAMPLES = glob.glob(f'{inputdir}/*/*f*q*')
     check_presence_fastq(SAMPLES)
     samplesdict = {"SAMPLES":{}}
     for i in SAMPLES:
