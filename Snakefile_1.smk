@@ -4,14 +4,17 @@ from SCRIPTS import coverage_filter
 import pandas as pd
 import sys
 from Bio import SeqIO
+
+
 configfile: "samples/samples.yaml"
 configfile: "config/config.yaml"
 configfile: "config/reference.yaml"
+
 SAMPLES = config['SAMPLES']
-CASETTE = config['CASETTE']
+CASETTE = config['CASETTE']['ref1']
 STRETCHDEL = [True, False]
 
-cassette = CASETTE["ref1"]
+
 
 def get_length_dna(location_fasta):
     #first do sanity check to confirm that only 1 fasta is present as reference
@@ -41,7 +44,7 @@ rule build_database:
         CASETTE
     output:
         comp = "ref/kma_database/reference.comp.b",
-        index = "ref/kma_database/reference.index.b",
+        # index = "ref/kma_database/reference.index.b",
         length = "ref/kma_database/reference.length.b",
         name = "ref/kma_database/reference.name",
         seq = "ref/kma_database/reference.seq.b",
@@ -55,7 +58,7 @@ rule build_database:
 rule kma_alignment:
     input:
         forward = lambda wildcards: SAMPLES[wildcards.sample]['forward'],
-        reverse = lambda wildcards: SAMPLES[wildcards.sample]['reverse'],
+        rev = lambda wildcards: SAMPLES[wildcards.sample]['reverse'],
         reference = "ref/kma_database/reference.comp.b"
     params:
         reference = "ref/kma_database/reference",
@@ -68,7 +71,7 @@ rule kma_alignment:
     conda:
         "envs/KMA.yaml"
     shell:
-        "kma -ipe {input.forward} {input.reverse} -o {params.output} -t_db {params.reference}"
+        "kma -ipe {input.forward} {input.rev} -o {params.output} -t_db {params.reference}"
 
 rule coverage_filter:
     input:
