@@ -74,7 +74,6 @@ def launch(cores):
     #change to the location of the repo, this will make sure all envs, databases and other stuff sticks in the repocryptic
     os.chdir(f"{LOCATIONREPO}")
     os.system(f"snakemake  --use-conda --cores {cores} --snakefile Snakefile_1.smk")
-    sys.exit()
     os.system(f"snakemake  --use-conda --cores {cores} --snakefile Snakefile_2.smk")
 
 def main(command_line = None):

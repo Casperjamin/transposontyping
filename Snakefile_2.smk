@@ -53,8 +53,8 @@ rule trim_reads:
         forward = lambda wildcards: SAMPLES[wildcards.sample]['forward'],
         reverse = lambda wildcards: SAMPLES[wildcards.sample]['reverse']
     output:
-        forward = "input/{sample}/forward_trimmed.fastq.gz",
-        reverse = "input/{sample}/reverse_trimmed.fastq.gz",
+        forward = temp("input/{sample}/forward_trimmed.fastq.gz"),
+        reverse = temp("input/{sample}/reverse_trimmed.fastq.gz"),
         report = directory("output/{sample}/fastp_reports/")
     conda:
         "envs/fastp_environment.yml"
