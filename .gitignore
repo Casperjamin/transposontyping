@@ -6,6 +6,7 @@ __pycache__/
 # snakemake
 samples/*
 config/*
+.snakemake
 
 # C extensions
 *.so
