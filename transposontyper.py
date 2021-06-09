@@ -62,16 +62,8 @@ def define_output(outputdir):
     with open(f"{LOCATIONREPO}/config/config.yaml", 'w+') as f:
         f.write(outdirloc)
 
-def define_score(score):
-    score_dict = {"SCORE": {}}
-    score_dict["SCORE"] = {
-    "minimal_quality": int(score)}
-    score_dump = yaml.dump(score_dict, default_flow_style=False)
-    with open("config/score.yaml", 'w+') as score_file:
-        score_file.write(score_dump)
-
 def launch(cores):
-    #change to the location of the repo, this will make sure all envs, databases and other stuff sticks in the repocryptic
+    #change to the location of the repo, this will make sure all envs, databases and other stuff sticks in the repo
     os.chdir(f"{LOCATIONREPO}")
     print('Starting pre-workflow to select suitable datasets')
     os.system(f"snakemake  --use-conda --cores {cores} --snakefile Snakefile_1.smk ")
@@ -85,11 +77,9 @@ def main(command_line = None):
     parser.add_argument("-o", required = True, dest = "output_dir")
     parser.add_argument("--ref", required = True, dest = "ref", nargs = 1)
     parser.add_argument("--cores", required = False, dest = "cores", default = 8, type = int)
-    parser.add_argument("-SNP_score", required = False, dest = "SNP_score", default = 20, type = int)
     args = parser.parse_args(command_line)
     define_input(args.input_dir)
     define_output(args.output_dir)
-    #define_ref(args.ref)
     define_ref(args.ref)
     define_score(args.SNP_score)
     launch(args.cores)

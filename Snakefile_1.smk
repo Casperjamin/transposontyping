@@ -50,7 +50,6 @@ rule build_database:
         CASETTE
     output:
         comp = "ref/kma_database/reference.comp.b",
-        # index = "ref/kma_database/reference.index.b",
         length = "ref/kma_database/reference.length.b",
         name = "ref/kma_database/reference.name",
         seq = "ref/kma_database/reference.seq.b",

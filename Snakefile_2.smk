@@ -1,8 +1,5 @@
 import glob
-from SCRIPTS import tetyperead
-from SCRIPTS import merger
-from SCRIPTS import report
-from SCRIPTS import coverage_filter
+from SCRIPTS import tetyperead, merger, report, coverage_filter
 import pandas as pd
 import sys
 from Bio import SeqIO
@@ -11,12 +8,11 @@ from Bio import SeqIO
 configfile: "samples/good_samples.yaml"
 configfile: "config/config.yaml"
 configfile: "config/reference.yaml"
-configfile: "config/score.yaml"
+
 
 SAMPLES = config['SAMPLES']
 OUTDIR = config['OUTPUT'] + "/"
 CASETTE = config['CASETTE']
-SCORE = config['SCORE']
 STRETCHDEL = [True, False]
 
 casette = CASETTE["ref1"]
