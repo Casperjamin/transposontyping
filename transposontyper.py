@@ -56,7 +56,7 @@ def define_input(inputdir):
         f.write(samples_loc)
 
 def define_output(outputdir):
-    outdir = {"OUTPUT":outputdir.strip("/")}
+    outdir = {"OUTPUT":"/" + outputdir.strip("/")}
     outdirloc = yaml.dump(outdir, default_flow_style=False)
     os.system(f"mkdir -p {LOCATIONREPO}/config")
     with open(f"{LOCATIONREPO}/config/config.yaml", 'w+') as f:
@@ -73,7 +73,9 @@ def define_score(score):
 def launch(cores):
     #change to the location of the repo, this will make sure all envs, databases and other stuff sticks in the repocryptic
     os.chdir(f"{LOCATIONREPO}")
-    os.system(f"snakemake  --use-conda --cores {cores} --snakefile Snakefile_1.smk")
+    print('Starting pre-workflow to select suitable datasets')
+    os.system(f"snakemake  --use-conda --cores {cores} --snakefile Snakefile_1.smk ")
+    print("finished selecting datasets, lets continue with actual workflow")
     os.system(f"snakemake  --use-conda --cores {cores} --snakefile Snakefile_2.smk")
 
 def main(command_line = None):

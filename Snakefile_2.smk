@@ -6,13 +6,15 @@ from SCRIPTS import coverage_filter
 import pandas as pd
 import sys
 from Bio import SeqIO
+
+
 configfile: "samples/good_samples.yaml"
 configfile: "config/config.yaml"
 configfile: "config/reference.yaml"
 configfile: "config/score.yaml"
+
 SAMPLES = config['SAMPLES']
-
-
+OUTDIR = config['OUTPUT'] + "/"
 CASETTE = config['CASETTE']
 SCORE = config['SCORE']
 STRETCHDEL = [True, False]
@@ -37,29 +39,11 @@ def get_length_dna(location_fasta):
 
 rule all:
   input:
-    expand("output/{sample}/coverage_plots/", sample = SAMPLES),
-    expand('output/{sample}/quality_plots/', sample = SAMPLES),
-    expand("output/{sample}/tetype/{sample}_summary.txt", sample = SAMPLES),
-    expand("output/{sample}/TEType_convert/{sample}_{stretchdel}_TEType_df.tsv", sample = SAMPLES, stretchdel = STRETCHDEL),
-    expand("output/SNPs_{stretchdel}.csv", stretchdel = STRETCHDEL),
-    expand("output/report/pairwise_distance_{stretchdel}.csv", stretchdel = STRETCHDEL),
-    expand("output/report/dendrogram_{stretchdel}.png",stretchdel = STRETCHDEL),
-
-################################################################################
-# fastp read trimming
-################################################################################
-rule trim_reads:
-    input:
-        forward = lambda wildcards: SAMPLES[wildcards.sample]['forward'],
-        reverse = lambda wildcards: SAMPLES[wildcards.sample]['reverse']
-    output:
-        forward = temp("input/{sample}/forward_trimmed.fastq.gz"),
-        reverse = temp("input/{sample}/reverse_trimmed.fastq.gz"),
-        report = directory("output/{sample}/fastp_reports/")
-    conda:
-        "envs/fastp_environment.yml"
-    shell:
-        "fastp -i {input.forward} -I {input.reverse} -o {output.forward} -O {output.reverse} -j {output.report}fastp.json -h {output.report}fastp.html"
+    expand(OUTDIR + "output/{sample}/tetype/{sample}_summary.txt", sample = SAMPLES),
+    expand(OUTDIR + "output/{sample}/TEType_convert/{sample}_{stretchdel}_TEType_df.tsv", sample = SAMPLES, stretchdel = STRETCHDEL),
+    expand(OUTDIR + "output/SNPs_{stretchdel}.csv", stretchdel = STRETCHDEL),
+    expand(OUTDIR + "output/report/pairwise_distance_{stretchdel}.csv", stretchdel = STRETCHDEL),
+    expand(OUTDIR + "output/report/dendrogram_{stretchdel}.png",stretchdel = STRETCHDEL),
 
 
 ################################################################################
@@ -68,54 +52,17 @@ rule trim_reads:
 
 rule generate_heatmap_dendrogram:
     input:
-        csv = "output/SNPs_{stretchdel}.csv"
+        csv = OUTDIR + "output/SNPs_{stretchdel}.csv"
     output:
-        "output/report/pairwise_distance_{stretchdel}.csv",
-        "output/report/dendrogram_{stretchdel}.png"
+        OUTDIR + "output/report/pairwise_distance_{stretchdel}.csv",
+        OUTDIR + "output/report/dendrogram_{stretchdel}.png"
     params:
-        "output/report/"
+        OUTDIR + "output/report/"
     run:
         os.system(f'mkdir -p {params}')
         report.generate_report(input, params, get_length_dna(casette), wildcards.stretchdel)
 
 
-rule generate_coverage_matrix:
-    input:
-        "output/{sample}/tetype/{sample}.bam"
-    output:
-        "output/{sample}/coverage/{sample}_bedgraph"
-    conda:
-        "envs/TEType_environment.yml"
-    params:
-        "output/{sample}/tetype/{sample}"
-    shell:
-        "samtools sort -o {params}_sorted.bam {params}.bam &&"
-        "bedtools genomecov -ibam {params}_sorted.bam -d > {output}"
-
-rule generate_coverage_plot:
-    input:
-        "output/{sample}/coverage/{sample}_bedgraph"
-    output:
-        directory("output/{sample}/coverage_plots/")
-    run:
-        report.generate_plot_coverage(str(input), output, wildcards.sample)
-        report.generate_hist_coverage(str(input), output, wildcards.sample)
-
-rule make_sam_files:
-    input:
-        "output/{sample}/tetype/{sample}.bam"
-    output:
-        "output/{sample}/tetype/{sample}.sam"
-    shell:
-        "samtools view -h -o {output} {input}"
-
-rule generate_SNP_quality_plot:
-    input:
-        "output/{sample}/tetype/{sample}.vcf"
-    output:
-        directory('output/{sample}/quality_plots/')
-    run:
-        report.generate_plot_SNP_quality(str(input), output, wildcards.sample)
 
 ################################################################################
 # TETyper, conversion and merging
@@ -123,12 +70,12 @@ rule generate_SNP_quality_plot:
 
 rule TETyping:
   input:
-    forward = "input/{sample}/forward_trimmed.fastq.gz",
-    reverse = "input/{sample}/reverse_trimmed.fastq.gz"
+    forward = lambda wildcards: SAMPLES[wildcards.sample]['forward'],
+    rev = lambda wildcards: SAMPLES[wildcards.sample]['reverse']
   output:
-    "output/{sample}/tetype/{sample}_summary.txt",
-    "output/{sample}/tetype/{sample}.bam",
-    "output/{sample}/tetype/{sample}.vcf"
+    OUTDIR + "output/{sample}/tetype/{sample}_summary.txt",
+    OUTDIR + "output/{sample}/tetype/{sample}.bam",
+    OUTDIR + "output/{sample}/tetype/{sample}.vcf"
   threads:
     4
   conda:
@@ -136,22 +83,22 @@ rule TETyping:
   log:
     "logs/tetype/{sample}.txt"
   params:
-    "output/{sample}/tetype/{sample}"
+    OUTDIR + "output/{sample}/tetype/{sample}"
   shell:
     " TETyper.py --outprefix {params}"
     " --ref {casette}"
     " --fq1 {input.forward} "
-    " --fq2 {input.reverse} "
-    " --flank_len 10"
+    " --fq2 {input.rev} "
+    " --flank_len 10 "
     " --threads {threads} "
     "2> {log} "
 
 rule convert:
   input:
-    loc = "output/{sample}/tetype/{sample}_summary.txt",
-    vcf = "output/{sample}/tetype/{sample}.vcf"
+    loc = OUTDIR + "output/{sample}/tetype/{sample}_summary.txt",
+    vcf = OUTDIR + "output/{sample}/tetype/{sample}.vcf"
   output:
-    tsv = "output/{sample}/TEType_convert/{sample}_{stretchdel}_TEType_df.tsv"
+    tsv = OUTDIR + "output/{sample}/TEType_convert/{sample}_{stretchdel}_TEType_df.tsv"
   run:
     summary = tetyperead.tetype_result(f"{input.loc}", f"{casette}")
     df = summary.result_to_frame(input.loc, input.vcf, f"{SNP_score}", wildcards.stretchdel, output.tsv)
@@ -159,8 +106,8 @@ rule convert:
 
 rule merge:
     input:
-        samples = expand("output/{sample}/TEType_convert/{sample}_{stretchdel}_TEType_df.tsv", sample = SAMPLES, stretchdel = STRETCHDEL)
+        samples = expand(OUTDIR + "output/{sample}/TEType_convert/{sample}_{stretchdel}_TEType_df.tsv", sample = SAMPLES, stretchdel = STRETCHDEL)
     output:
-        "output/SNPs_{stretchdel}.csv"
+        OUTDIR + "output/SNPs_{stretchdel}.csv"
     run:
         df = merger.frame_merge([f"{input}"], wildcards.stretchdel, f'{output}')
