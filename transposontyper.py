@@ -7,12 +7,14 @@ import sys
 import yaml
 import sys
 
-def obtain_repoloc():
-    return os.path.dirname(os.path.abspath(__file__))
+
+LOCATIONREPO = os.path.dirname(os.path.abspath(__file__))
+
 
 def get_absolute_path(path):
     return os.path.abspath(path)
-LOCATIONREPO = obtain_repoloc()
+
+
 
 def define_ref(ref):
     casette_loc = str(ref)[2:-2]
@@ -31,7 +33,10 @@ def check_presence_fastq(SAMPLES):
     # exit statement if no fastq can be found
     if len(SAMPLES) == 0:
         print("\nNo fastq files found in subdirectories\n")
-        print("Please give a input directory subdirectories with fastq files \nexiting now.")
+        print(
+            """Please give a input directory subdirectories with fastq files
+             Exiting now."""
+         )
         sys.exit()
 
 
@@ -47,8 +52,9 @@ def define_input(inputdir):
         reverse = glob.glob(f"{inputdir}/{samplename}/*2*f*q*")[0]
 
         samplesdict["SAMPLES"][str(samplename)] = {
-        "forward": get_absolute_path(forward),
-        "reverse": get_absolute_path(reverse)}
+            "forward": get_absolute_path(forward),
+            "reverse": get_absolute_path(reverse)
+        }
 
     samples_loc = yaml.dump(samplesdict, default_flow_style=False)
     os.system(f"mkdir -p {LOCATIONREPO}/samples")
@@ -63,7 +69,8 @@ def define_output(outputdir):
         f.write(outdirloc)
 
 def launch(cores):
-    #change to the location of the repo, this will make sure all envs, databases and other stuff sticks in the repo
+    """change to the location of the repo, this will make sure all envs,
+     databases and other stuff sticks in the repo"""
     os.chdir(f"{LOCATIONREPO}")
     print('Starting pre-workflow to select suitable datasets')
     os.system(f"snakemake  --use-conda --cores {cores} --snakefile Snakefile_1.smk ")
@@ -81,7 +88,6 @@ def main(command_line = None):
     define_input(args.input_dir)
     define_output(args.output_dir)
     define_ref(args.ref)
-    define_score(args.SNP_score)
     launch(args.cores)
 
 if __name__ == "__main__":

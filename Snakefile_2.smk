@@ -13,10 +13,7 @@ configfile: "config/reference.yaml"
 SAMPLES = config['SAMPLES']
 OUTDIR = config['OUTPUT'] + "/"
 CASETTE = config['CASETTE']
-STRETCHDEL = [True, False]
-
 casette = CASETTE["ref1"]
-SNP_score = SCORE["minimal_quality"]
 
 
 def get_length_dna(location_fasta):
@@ -36,10 +33,10 @@ def get_length_dna(location_fasta):
 rule all:
   input:
     expand(OUTDIR + "output/{sample}/tetype/{sample}_summary.txt", sample = SAMPLES),
-    expand(OUTDIR + "output/{sample}/TEType_convert/{sample}_{stretchdel}_TEType_df.tsv", sample = SAMPLES, stretchdel = STRETCHDEL),
-    expand(OUTDIR + "output/SNPs_{stretchdel}.csv", stretchdel = STRETCHDEL),
-    expand(OUTDIR + "output/report/pairwise_distance_{stretchdel}.csv", stretchdel = STRETCHDEL),
-    expand(OUTDIR + "output/report/dendrogram_{stretchdel}.png",stretchdel = STRETCHDEL),
+    expand(OUTDIR + "output/{sample}/TEType_convert/{sample}_TEType_df.tsv", sample = SAMPLES),
+    expand(OUTDIR + "output/SNPs.csv"),
+    expand(OUTDIR + "output/report/pairwise_distance.csv"),
+    expand(OUTDIR + "output/report/dendrogram.png"),
 
 
 ################################################################################
@@ -48,15 +45,15 @@ rule all:
 
 rule generate_heatmap_dendrogram:
     input:
-        csv = OUTDIR + "output/SNPs_{stretchdel}.csv"
+        csv = OUTDIR + "output/SNPs.csv"
     output:
-        OUTDIR + "output/report/pairwise_distance_{stretchdel}.csv",
-        OUTDIR + "output/report/dendrogram_{stretchdel}.png"
+        OUTDIR + "output/report/pairwise_distance.csv",
+        OUTDIR + "output/report/dendrogram.png"
     params:
         OUTDIR + "output/report/"
     run:
         os.system(f'mkdir -p {params}')
-        report.generate_report(input, params, get_length_dna(casette), wildcards.stretchdel)
+        report.generate_report(input, params, get_length_dna(casette))
 
 
 
@@ -92,18 +89,18 @@ rule TETyping:
 rule convert:
   input:
     loc = OUTDIR + "output/{sample}/tetype/{sample}_summary.txt",
-    vcf = OUTDIR + "output/{sample}/tetype/{sample}.vcf"
   output:
-    tsv = OUTDIR + "output/{sample}/TEType_convert/{sample}_{stretchdel}_TEType_df.tsv"
+    tsv = OUTDIR + "output/{sample}/TEType_convert/{sample}_TEType_df.tsv"
   run:
-    summary = tetyperead.tetype_result(f"{input.loc}", f"{casette}")
-    df = summary.result_to_frame(input.loc, input.vcf, f"{SNP_score}", wildcards.stretchdel, output.tsv)
-    df.to_csv(f"{output.tsv}", sep = "\t")
+    summary = tetyperead.tetype_result(summary=input.loc, fragment=casette)
+    df = summary.result_to_frame()
+    df.to_csv(output.tsv, sep = "\t")
 
 rule merge:
     input:
-        samples = expand(OUTDIR + "output/{sample}/TEType_convert/{sample}_{stretchdel}_TEType_df.tsv", sample = SAMPLES, stretchdel = STRETCHDEL)
+        samples = expand(OUTDIR + "output/{sample}/TEType_convert/{sample}_TEType_df.tsv", sample = SAMPLES)
     output:
-        OUTDIR + "output/SNPs_{stretchdel}.csv"
+        OUTDIR + "output/SNPs.csv"
     run:
-        df = merger.frame_merge([f"{input}"], wildcards.stretchdel, f'{output}')
+        df = merger.frame_merge(list(input))
+        df.to_csv(str(output), sep = '\t')
