@@ -84,8 +84,10 @@ rule coverage_filter:
         yaml = "samples/samples.yaml"
     output:
         yaml = "samples/good_samples.yaml"
+    params:
+        sample = lambda wildcards: SAMPLES[wildcards.sample]
     run:
         print(f'writing suitable samples to {output.yaml}')
         for i in input.res:
-            coverage_filter.selection(i)
+            coverage_filter.selection(i, params.sample)
         coverage_filter.filter(input.yaml, output.yaml)

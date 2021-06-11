@@ -6,10 +6,10 @@ import io
 
 failed_samples = []
 
-def selection(kma_res):
-    sample_id = kma_res.split('/')[1]
+def selection(kma_res, sample_id):
     df = pd.read_csv(kma_res, sep = '\t')
-    if int(df['Template_Identity']) <= 50:
+    identity = pd.Series(df['Template_Identity'])
+    if identity.max() <= 50:
         failed_samples.append(sample_id)
 
 def filter(input_yaml, output_yaml):
