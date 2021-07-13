@@ -14,7 +14,7 @@ configfile: "config/reference.yaml"
 OUTDIR = config['OUTPUT'] + "/"
 SAMPLES = config['SAMPLES']
 CASETTE = config['CASETTE']['ref1']
-STRETCHDEL = [True, False]
+
 
 
 
@@ -84,10 +84,9 @@ rule coverage_filter:
         yaml = "samples/samples.yaml"
     output:
         yaml = "samples/good_samples.yaml"
-    params:
-        sample = lambda wildcards: SAMPLES[wildcards.sample]
     run:
         print(f'writing suitable samples to {output.yaml}')
         for i in input.res:
-            coverage_filter.selection(i, params.sample)
+            samplename = i.split("/")[-3]
+            coverage_filter.selection(i, samplename)
         coverage_filter.filter(input.yaml, output.yaml)
